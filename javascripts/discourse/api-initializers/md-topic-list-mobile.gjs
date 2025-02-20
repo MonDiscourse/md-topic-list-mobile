@@ -1,3 +1,5 @@
+import { and } from "truth-helpers";
+import TopicPostBadges from "discourse/components/topic-post-badges";
 import avatar from "discourse/helpers/avatar";
 import icon from "discourse/helpers/d-icon";
 import formatDate from "discourse/helpers/format-date";
@@ -20,16 +22,32 @@ const CommentContent = <template>
 const LastPostContent = <template>
   <td class="last-post">
     <div class="poster-avatar">
-      <a
-        href={{@outletArgs.topic.lastPostUrl}}
-        data-user-card={{@outletArgs.topic.last_poster_username}}
-      >{{avatar @outletArgs.topic.lastPosterUser imageSize="small"}}
-      </a>
+      {{#if
+        (and @outletArgs.showTopicPostBadges @outletArgs.topic.unread_posts)
+      }}
+        <TopicPostBadges
+          @unreadPosts={{@outletArgs.topic.unread_posts}}
+          @unseen={{@outletArgs.topic.unseen}}
+          @url={{@outletArgs.topic.lastUnreadUrl}}
+        />
+      {{else}}
+        <a
+          href={{@outletArgs.topic.lastPostUrl}}
+          data-user-card={{@outletArgs.topic.last_poster_username}}
+        >{{avatar @outletArgs.topic.lastPosterUser imageSize="small"}}
+        </a>
+      {{/if}}
     </div>
-    <div class="poster-info">
-      <a href={{@outletArgs.topic.lastPostUrl}}>
-        {{formatDate @outletArgs.topic.bumpedAt format="tiny"}}
-      </a>
+    <div class="num activity last poster-info">
+      <span title={{@outletArgs.topic.bumpedAtTitle}} class="age activity">
+        <a href={{@outletArgs.topic.lastPostUrl}}>{{formatDate
+            @outletArgs.topic.bumpedAt
+            format="tiny"
+            noTitle="true"
+          }}
+        </a>
+      </span>
+
     </div>
   </td>
 </template>;
