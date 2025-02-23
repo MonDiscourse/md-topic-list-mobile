@@ -1,5 +1,8 @@
 .topic-list {
   .topic-list-body {
+    .main-link {
+      width: 100%;
+    }
     .last-post {
       place-items: center;
 
@@ -7,33 +10,27 @@
         margin-top: 5px;
       }
     }
-
     .topic-list-data {
       &.bulk-select-enabled .topic-item-metadata {
         margin-left: 50px;
       }
-
       .topic-item-metadata {
         margin-left: 0;
-
         .topic-excerpt,
         .topic-list-data.posts,
         .poster-avatar,
         .topic-post-badges {
           display: none;
         }
-
         .topic-item-stats {
           .activity {
             display: none;
           }
-
           .comments {
             display: inline-block;
             font-size: var(--font-down-1);
             margin-inline: 0.25em 0.5em;
             vertical-align: bottom;
-
             svg {
               vertical-align: bottom;
               margin-bottom: 0.125em;
