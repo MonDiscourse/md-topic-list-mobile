@@ -1,27 +1,48 @@
 .topic-list {
   .topic-list-body {
-    .main-link {
+
+	.main-link {
       width: 100%;
     }
+
+    .badge-notification {
+      font-size: var(--font-down-1);
+    }
+    
     .last-post {
       place-items: center;
       .poster-info {
         margin-top: 5px;
       }
-      .poster-avatar {
-        text-align: center
+	  .poster-avatar {
+        text-align: center;
+	  }
+      .num.activity a {
+        font-size: var(--font-down-1);
       }
     }
+    
     .topic-list-data {
+      .main-link {
+        width: auto;
+        display: inline-block;
+      }
       &.bulk-select-enabled .topic-item-metadata {
         margin-left: 50px;
       }
       .topic-item-metadata {
-        margin-left: 0;
-        .topic-excerpt,
+        margin-left: 3px;
         .topic-list-data.posts,
+        .topic-excerpt {
+           width: 100%;
+           display: block;
+        }
+        .pull-right {
+          float: unset;
+          display: inline-block;
+        }
         .poster-avatar,
-        .topic-post-badges {
+        .badge-posts {
           display: none;
         }
         .topic-item-stats {

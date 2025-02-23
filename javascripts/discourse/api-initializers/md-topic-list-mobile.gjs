@@ -8,6 +8,18 @@ import { withPluginApi } from "discourse/lib/plugin-api";
 
 const EmptyContent = <template>{{~! no whitespace ~}}</template>;
 
+const TopicBadgeMobContent = <template>
+  {{#if
+        (and @outletArgs.showTopicPostBadges @outletArgs.topic.unread_posts)
+      }}
+        <TopicPostBadges
+          @unreadPosts={{@outletArgs.topic.unread_posts}}
+          @unseen={{@outletArgs.topic.unseen}}
+          @url={{@outletArgs.topic.lastUnreadUrl}}
+        />
+  {{/if}}
+</template>;
+
 const CommentContent = <template>
   <span class="comments">
     {{icon "far-comment"}}
@@ -22,21 +34,11 @@ const CommentContent = <template>
 const LastPostContent = <template>
   <td class="last-post">
     <div class="poster-avatar">
-      {{#if
-        (and @outletArgs.showTopicPostBadges @outletArgs.topic.unread_posts)
-      }}
-        <TopicPostBadges
-          @unreadPosts={{@outletArgs.topic.unread_posts}}
-          @unseen={{@outletArgs.topic.unseen}}
-          @url={{@outletArgs.topic.lastUnreadUrl}}
-        />
-      {{else}}
         <a
           href={{@outletArgs.topic.lastPostUrl}}
           data-user-card={{@outletArgs.topic.last_poster_username}}
         >{{avatar @outletArgs.topic.lastPosterUser imageSize="small"}}
         </a>
-      {{/if}}
     </div>
     <div class="num activity last poster-info">
       <span title={{@outletArgs.topic.bumpedAtTitle}} class="age activity">
@@ -60,6 +62,7 @@ function initialize(api) {
   }
 
   api.renderInOutlet("topic-list-item-mobile-avatar", EmptyContent);
+  api.renderInOutlet("topic-list-after-title", TopicBadgeMobContent);
   api.renderInOutlet("topic-list-after-category", CommentContent);
   api.renderAfterWrapperOutlet("topic-list-item", LastPostContent);
 }
