@@ -1,10 +1,5 @@
 .topic-list {
   .topic-list-body {
-
-	.main-link {
-      width: 100%;
-    }
-
     .badge-notification {
       font-size: var(--font-down-1);
     }
@@ -24,14 +19,13 @@
     
     .topic-list-data {
       .main-link {
-        width: auto;
-        display: inline-block;
+        display: inline;
       }
       &.bulk-select-enabled .topic-item-metadata {
         margin-left: 50px;
       }
       .topic-item-metadata {
-        margin-left: 3px;
+        margin-left: 0;
         .topic-list-data.posts,
         .topic-excerpt {
            width: 100%;
