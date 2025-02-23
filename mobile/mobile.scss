@@ -1,7 +1,7 @@
 .topic-list {
   .topic-list-body {
     .badge-notification {
-      font-size: var(--font-down-1);
+      font-size: var(--font-down-2);
     }
     
     .last-post {
@@ -19,7 +19,8 @@
     
     .topic-list-data {
       .main-link {
-        display: inline;
+        display: inline-block;
+        width: auto;
       }
       &.bulk-select-enabled .topic-item-metadata {
         margin-left: 50px;
@@ -32,8 +33,7 @@
            display: block;
         }
         .pull-right {
-          float: unset;
-          display: inline;
+          display: none;
         }
         .poster-avatar,
         .badge-posts {
