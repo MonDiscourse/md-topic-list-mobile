@@ -5,9 +5,11 @@
     }
     .last-post {
       place-items: center;
-
       .poster-info {
         margin-top: 5px;
+      }
+      .poster-avatar {
+        text-align: center
       }
     }
     .topic-list-data {
