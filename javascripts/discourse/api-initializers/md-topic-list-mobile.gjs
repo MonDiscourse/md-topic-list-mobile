@@ -9,15 +9,11 @@ import { withPluginApi } from "discourse/lib/plugin-api";
 const EmptyContent = <template>{{~! no whitespace ~}}</template>;
 
 const TopicBadgeMobContent = <template>
-  {{#if
-        (and @outletArgs.showTopicPostBadges @outletArgs.topic.unread_posts)
-      }}
         <TopicPostBadges
           @unreadPosts={{@outletArgs.topic.unread_posts}}
           @unseen={{@outletArgs.topic.unseen}}
           @url={{@outletArgs.topic.lastUnreadUrl}}
         />
-  {{/if}}
 </template>;
 
 const CommentContent = <template>
