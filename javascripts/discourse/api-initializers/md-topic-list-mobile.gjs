@@ -11,7 +11,6 @@ const EmptyContent = <template>{{~! no whitespace ~}}</template>;
 const TopicBadgeMobContent = <template>
         <TopicPostBadges
           @unreadPosts={{@outletArgs.topic.unread_posts}}
-          @unseen={{@outletArgs.topic.unseen}}
           @url={{@outletArgs.topic.lastUnreadUrl}}
         />
 </template>;
