@@ -26,6 +26,17 @@ const CommentContent = <template>
   </span>
 </template>;
 
+const AuthorCommentContent = <template>
+  <div class="category-author-comments">
+    <span class="topic-creator">
+      {{d-icon "user"}} <a href="/users/{{this.topic.creator.username}}" data-auto-route="true" data-user-card="{{this.topic.creator.username}}">{{this.topic.creator.username}}</a>
+    </span>
+    <span class="comments-cat">
+      {{d-icon "far-comment"}} <a href="{{this.topic.firstPostUrl}}">{{number this.topic.replyCount noTitle="true"}}</a>
+    </span>
+  </div>
+</template>;
+
 const LastPostContent = <template>
   <td class="last-post">
     <div class="poster-avatar">
@@ -59,6 +70,7 @@ function initialize(api) {
   api.renderInOutlet("topic-list-item-mobile-avatar", EmptyContent);
   api.renderInOutlet("topic-list-after-title", TopicBadgeMobContent);
   api.renderInOutlet("topic-list-after-category", CommentContent);
+  api.renderInOutlet("topic-list-main-link-bottom", AuthorCommentContent);
   api.renderAfterWrapperOutlet("topic-list-item", LastPostContent);
 }
 

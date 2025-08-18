@@ -57,5 +57,29 @@
         }
       }
     }
+	.category-author-comments {
+      display: none;
+	}
   }
+}
+
+body.category {
+    .category-author-comments {
+        display: block;
+        font-size: var(--font-down-2);
+        color: var(--primary);
+        padding-top: .15rem;
+        a {
+            color: var(--primary);
+        }
+        .comments-cat {
+            margin-left: 5px;
+            svg {
+                transform: scaleX(-1);
+            }
+        }
+    }
+    .topic-item-stats {
+        display: none;
+    }
 }
