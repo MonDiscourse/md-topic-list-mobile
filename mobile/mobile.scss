@@ -48,10 +48,14 @@
             font-size: var(--font-down-1);
             margin-inline: 0.25em 0.5em;
             vertical-align: bottom;
+            color: var(--primary-high);
             svg {
               vertical-align: bottom;
               margin-bottom: 0.125em;
               transform: scaleX(-1);
+            }
+            a {
+              color: var(--primary-high);
             }
           }
         }
