@@ -13,10 +13,13 @@
             font-size: var(--font-down-2);
         }
         .last-post {
-            text-align: center;
+            place-items: center;
             .poster-info {
                 margin-top: 5px;
             }
+	        .poster-avatar {
+                text-align: center;
+	        }
             .num.activity a {
                 font-size: var(--font-down-1);
             }
