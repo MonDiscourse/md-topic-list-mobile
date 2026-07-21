@@ -1,0 +1,94 @@
+@use "lib/viewport";
+
+@include viewport.from(sm) {
+  .mdtlm {
+    display: none !important;
+  }
+}
+
+@include viewport.until(sm) {
+    .topic-list {
+      .topic-list-body {
+        .badge-notification {
+            font-size: var(--font-down-2);
+        }
+        .last-post {
+            text-align: center;
+            .poster-info {
+                margin-top: 5px;
+            }
+            .num.activity a {
+                font-size: var(--font-down-1);
+            }
+        }
+        .topic-list-data {
+            .main-link {
+                display: inline-block;
+                width: auto;
+            }
+            &.bulk-select-enabled .topic-item-metadata {
+                margin-left: 50px;
+            }
+            .topic-item-metadata {
+                margin-left: 0;
+                .topic-list-data.posts,
+                .topic-excerpt {
+                    width: 100%;
+                    display: block;
+                }
+                .pull-right {
+                    display: none;
+                }
+                .poster-avatar,
+                .badge-posts {
+                    display: none;
+                }
+                .topic-item-stats {
+                    .activity {
+                        display: none;
+                    }
+                    .comments {
+                        display: inline-block;
+                        font-size: var(--font-down-1);
+                        margin-inline: 0.25em 0.5em;
+                        vertical-align: bottom;
+                        color: var(--primary-high);
+                        svg {
+                            vertical-align: bottom;
+                            margin-bottom: 0.125em;
+                            transform: scaleX(-1);
+                        }
+                        a {
+                            color: var(--primary-high);
+                        }
+                    }
+                }
+            }
+        }
+      }
+    }
+
+    .category-author-comments {
+        display: none;
+    }
+        body.category {
+        .category-author-comments {
+            display: block;
+            font-size: var(--font-down-2);
+            color: var(--primary);
+            padding-top: .15rem;
+            a {
+                color: var(--primary);
+            }
+            .comments-cat {
+                margin-left: 5px;
+                svg {
+                    transform: scaleX(-1);
+                }
+            }
+        }
+        .topic-item-stats {
+            display: none;
+        }
+    }
+}

@@ -1,83 +1,85 @@
-import { and } from "truth-helpers";
+import Component from "@glimmer/component";
+import { apiInitializer } from "discourse/lib/api";
+import DUserLink from "discourse/ui-kit/d-user-link";
+import dAvatar from "discourse/ui-kit/helpers/d-avatar";
+import dFormatDate from "discourse/ui-kit/helpers/d-format-date";
+import dIcon from "discourse/ui-kit/helpers/d-icon";
 import TopicPostBadges from "discourse/components/topic-post-badges";
-import avatar from "discourse/helpers/avatar";
-import icon from "discourse/helpers/d-icon";
-import formatDate from "discourse/helpers/format-date";
 import { number } from "discourse/lib/formatter";
-import { withPluginApi } from "discourse/lib/plugin-api";
+import { service } from "@ember/service";
+import { i18n } from "discourse-i18n";
 
-const EmptyContent = <template>{{~! no whitespace ~}}</template>;
 
-const TopicBadgeMobContent = <template>
+export default apiInitializer((api) => {
+  api.renderInOutlet(
+    "topic-list-item-mobile-avatar",
+    <template>
+		{{~! no whitespace ~}}
+    </template>
+  );
+
+  api.renderInOutlet(
+    "topic-list-after-title",
+    <template>
+      <span class="mdtlm">
         <TopicPostBadges
           @unreadPosts={{@outletArgs.topic.unread_posts}}
           @url={{@outletArgs.topic.lastUnreadUrl}}
         />
-</template>;
-
-const CommentContent = <template>
-  <span class="comments">
-    {{icon "far-comment"}}
-    <a href="{{@outletArgs.topic.firstPostUrl}}">{{number
-        @outletArgs.topic.replyCount
-        noTitle="true"
-      }}
-    </a>
-  </span>
-</template>;
-
-const AuthorComment = <template>
-  <div class="category-author-comments">
-    <span class="topic-creator">
-      {{icon "user"}} <a href="/users/{{@topic.creator.username}}" data-auto-route="true" data-user-card="{{@topic.creator.username}}">{{@topic.creator.username}}</a>
-    </span>
-    <span class="comments-cat">
-      {{icon "far-comment"}} <a href="{{@topic.firstPostUrl}}">{{number @topic.posts_count}}</a>
-    </span>
-  </div>
-  </template>;
-
-const LastPostContent = <template>
-  <td class="last-post">
-    <div class="poster-avatar">
+      </span>
+    </template>
+  );
+  
+  api.renderInOutlet(
+    "topic-list-after-category",
+    <template>
+      <span class="mdtlm comments">
+		{{dIcon "far-comment"}}
+		<a href="{{@outletArgs.topic.firstPostUrl}}">{{number
+			@outletArgs.topic.replyCount
+			noTitle="true"
+		}}
+		</a>
+		</span>
+    </template>
+  );
+  
+  api.renderInOutlet(
+    "topic-list-main-link-bottom",
+    <template>
+      <div class="mdtlm category-author-comments">
+		<span class="topic-creator">
+			{{dIcon "user"}} <a href="/users/{{@topic.creator.username}}" data-auto-route="true" data-user-card="{{@topic.creator.username}}">{{@topic.creator.username}}</a>
+		</span>
+		<span class="comments-cat">
+			{{dIcon "far-comment"}} <a href="{{@topic.firstPostUrl}}">{{number @topic.posts_count}}</a>
+		</span>
+	</div>
+    </template>
+  );
+  
+  api.renderAfterWrapperOutlet(
+    "topic-list-item",
+    <template>
+	<td class="mdtlm last-post">
+	  <div class="poster-avatar">
         <a
           href={{@outletArgs.topic.lastPostUrl}}
           data-user-card={{@outletArgs.topic.last_poster_username}}
-        >{{avatar @outletArgs.topic.lastPosterUser imageSize="small"}}
+        >{{dAvatar @outletArgs.topic.lastPosterUser imageSize="small"}}
         </a>
-    </div>
-    <div class="num activity last poster-info">
-      <span title={{@outletArgs.topic.bumpedAtTitle}} class="age activity">
-        <a href={{@outletArgs.topic.lastPostUrl}}>{{formatDate
-            @outletArgs.topic.bumpedAt
-            format="tiny"
-            noTitle="true"
-          }}
-        </a>
-      </span>
-
-    </div>
-  </td>
-</template>;
-
-function initialize(api) {
-  const site = api.container.lookup("service:site");
-
-  if (!site.mobileView) {
-    return;
-  }
-
-  api.renderInOutlet("topic-list-item-mobile-avatar", EmptyContent);
-  api.renderInOutlet("topic-list-after-title", TopicBadgeMobContent);
-  api.renderInOutlet("topic-list-after-category", CommentContent);
-  api.renderInOutlet("topic-list-main-link-bottom", AuthorComment);
-  api.renderAfterWrapperOutlet("topic-list-item", LastPostContent);
-}
-
-export default {
-  name: "md-topic-list-mobile",
-
-  initialize() {
-    withPluginApi("1.28.0", (api) => initialize(api));
-  },
-};
+	  </div>
+	  <div class="num activity last poster-info">
+		<span title={{@outletArgs.topic.bumpedAtTitle}} class="age activity">
+			<a href={{@outletArgs.topic.lastPostUrl}}>{{dFormatDate
+				@outletArgs.topic.bumpedAt
+				format="tiny"
+				noTitle="true"
+			}}
+			</a>
+		</span>
+	  </div>
+	</td>
+    </template>
+  );
+});
